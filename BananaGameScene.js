@@ -3,7 +3,7 @@
  *  Author: Chris Jones
  *  11/21/2024
  *  AppleGame v.03
- */
+ */   
 
 import './style.css'
 import Phaser from 'phaser';
@@ -42,7 +42,7 @@ class BananaGameScene extends Phaser.Scene{
     }
   
     create() {
-  
+      this.cameras.main.fadeIn(1000, 0, 0, 0);
       this.coinMusic = this.sound.add("coin");
       this.bgMusic = this.sound.add("bgMusic");
       // this.bgMusic.play();
@@ -61,7 +61,8 @@ class BananaGameScene extends Phaser.Scene{
   
       this.physics.add.overlap(this.target, this.player, this.targetHit, null, this);
   
-      this.cursor = this.input.keyboard.createCursorKeys();
+      this.aKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A); 
+      this.dKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D); 
   
       this.textScore = this.add.text(sizes.width - 120, 10, "Score: 0", {
         font: "25px Arial",
@@ -92,11 +93,9 @@ class BananaGameScene extends Phaser.Scene{
         this.target.setX(this.getRandomX());
       }
   
-      const {left, right} = this.cursor;
-  
-      if (left.isDown) {
+      if (this.aKey.isDown) {
         this.player.setVelocityX(-this.playerSpeed);
-      } else if (right.isDown) {
+      } else if (this.dKey.isDown) {
         this.player.setVelocityX(this.playerSpeed);
       } else {
         this.player.setVelocityX(0);

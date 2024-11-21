@@ -7,6 +7,7 @@ import './style.css'
 import Phaser from 'phaser';
 import {sizes, speedDown, AppleGameScene} from './AppleGameScene.js';
 import { BananaGameScene } from './BananaGameScene.js';
+import { TitleScene } from './TitleScene.js';
 
 const gameCanvas = document.getElementById('gameCanvas');
 
@@ -24,7 +25,7 @@ const config = {
       debug: true
     }
   },
-  scene: [AppleGameScene, BananaGameScene]
+  scene: [TitleScene, AppleGameScene, BananaGameScene]
 }
 
 const game = new Phaser.Game(config);
