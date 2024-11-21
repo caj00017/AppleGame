@@ -1,4 +1,10 @@
-import { BananaGameScene } from './BananaGameScene';
+/*
+ *  BananaGameScene.js
+ *  Author: Chris Jones
+ *  11/21/2024
+ *  AppleGame v.03
+ */
+
 import './style.css'
 import Phaser from 'phaser';
 
@@ -7,11 +13,11 @@ const sizes = {
     height: 500
   }
   
-const speedDown = 150;
+const speedDown = 300;
 
-class AppleGameScene extends Phaser.Scene{
+class BananaGameScene extends Phaser.Scene{
     constructor() {
-      super("apple-game");
+      super("banana-game");
       this.player;
       this.cursor;
       this.playerSpeed = speedDown + 200; 
@@ -27,9 +33,9 @@ class AppleGameScene extends Phaser.Scene{
     }
   
     preload() {
-      this.load.image("bg", "/assets/bg.png");
+      this.load.image("bg2", "/assets/bg2.png");
       this.load.image("basket", "/assets/basket.png")
-      this.load.image("apple", "/assets/apple.png");
+      this.load.image("banana", "/assets/banana.png");
       this.load.image("money", "/assets/money.png");
       this.load.audio("coin", "/assets/coin.mp3");
       this.load.audio("bgMusic", "/assets/bgMusic.mp3");
@@ -41,7 +47,7 @@ class AppleGameScene extends Phaser.Scene{
       this.bgMusic = this.sound.add("bgMusic");
       // this.bgMusic.play();
   
-      this.add.image(0, 0, "bg").setOrigin(0,0);
+      this.add.image(0, 0, "bg2").setOrigin(0,0);
       this.player = this.physics.add.image(0, sizes.height - 100, "basket").setOrigin(0,0);
       this.player.setImmovable(true);
       this.player.body.allowGravity = false;
@@ -50,7 +56,7 @@ class AppleGameScene extends Phaser.Scene{
       this.player.setSize(this.player.width-this.player.width/4, this.player.height/6)
       .setOffset(this.player.width/10, this.player.height - this.player.height/10);
   
-      this.target = this.physics.add.image(0,0, "apple").setOrigin(0,0);
+      this.target = this.physics.add.image(0,0, "banana").setOrigin(0,0);
       this.target.setMaxVelocity(0, speedDown);
   
       this.physics.add.overlap(this.target, this.player, this.targetHit, null, this);
@@ -95,10 +101,6 @@ class AppleGameScene extends Phaser.Scene{
       } else {
         this.player.setVelocityX(0);
       }
-
-      if (this.points == 10) {
-        this.scene.start("banana-game");
-      }
     }
   
     getRandomX() {
@@ -120,4 +122,4 @@ class AppleGameScene extends Phaser.Scene{
     }
   }
 
-  export {sizes, speedDown, AppleGameScene};
+  export { BananaGameScene };
